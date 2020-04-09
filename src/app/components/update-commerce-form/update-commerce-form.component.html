@@ -1,0 +1,237 @@
+<section id="section-5-registro">
+  <div class="container">
+    <div class="form-container">
+      <h2 class="color1 center bebas">
+        FORMULARIO DE ACTUALIZACIÓN DE
+      </h2>
+      <div style="display: inline-flex;">
+        <h2 class="color2 h2-small center bebas">
+         DATOS SOCIOS CCQ
+        </h2>
+      </div>
+      <div class="hr-center background-color1"></div>
+      <form [formGroup]="updateCommerceForm">
+        <div class="col-2-equals">
+          <div class="col">
+            <label class="color3">RUC</label>
+            <input
+              type="text"
+              formControlName="RUC"
+              placeholder="Ingresa tu RUC"
+            />
+            <span
+              class="help-block"
+              *ngIf="
+                updateCommerceForm?.get('RUC').errors?.required &&
+                updateCommerceForm?.get('RUC').touched
+              "
+              >*Campo Obligatorio</span
+            >
+          </div>
+          <div class="col">
+            <label class="color3">Categoría del comercio</label>
+            <select formControlName="category">
+              <option value="">Seleccionar</option>
+              <option
+                [value]="category.commerceCategory"
+                *ngFor="let category of commerceCategories"
+                >{{ category.commerceCategory }}</option
+              >
+            </select>
+            <span
+              class="help-block"
+              *ngIf="
+                updateCommerceForm.get('category').errors?.required &&
+                updateCommerceForm.get('category').touched
+              "
+              >*Campo Obligatorio</span
+            >
+          </div>
+        </div>
+        <div class="col-3-equals">
+          <div class="col">
+            <label class="color3">Días de Apertura</label>
+            <select formControlName="frecuency">
+              <option value="">Seleccionar</option>
+              <option
+                *ngFor="let frecuency of frecuencyOptions"
+                [ngValue]="frecuency"
+                >{{ frecuency }}</option
+              >
+            </select>
+            <span
+              class="help-block"
+              *ngIf="
+                updateCommerceForm.get('frecuency').errors?.required &&
+                updateCommerceForm.get('frecuency').touched
+              "
+              >*Campo Obligatorio</span
+            >
+          </div>
+          <div class="col">
+            <label class="color3" for="horarios">Horario de Apertura</label>
+            <div class="toggle-example" style="display: inline-flex;">
+              <input
+                type="text"
+                [ngxTimepicker]="toggleTimepicker"
+                formControlName="hourOpen"
+                [disableClick]="false"
+                placeholder="Seleccionar"
+                readonly
+              />
+              <ngx-material-timepicker-toggle
+                [for]="toggleTimepicker"
+              ></ngx-material-timepicker-toggle>
+              <ngx-material-timepicker
+                #toggleTimepicker
+              ></ngx-material-timepicker>
+            </div>
+            <span
+              class="help-block"
+              *ngIf="updateCommerceForm.hasError('hourLessError', 'hourOpen')"
+              >Atención: El horario de apertura debe ser menor al horario de
+              cierre</span
+            >
+          </div>
+          <div class="col">
+            <label class="color3" for="horarios">Horario de cierre</label>
+            <div class="toggle-example" style="display: inline-flex;">
+              <input
+                type="text"
+                placeholder="Seleccionar"
+                [ngxTimepicker]="toggleTimepicker2"
+                formControlName="hourClose"
+                [disableClick]="false"
+                readonly
+              />
+              <ngx-material-timepicker-toggle
+                [for]="toggleTimepicker2"
+              ></ngx-material-timepicker-toggle>
+              <ngx-material-timepicker
+                #toggleTimepicker2
+              ></ngx-material-timepicker>
+            </div>
+            <span
+              class="help-block"
+              *ngIf="updateCommerceForm.hasError('hourGreatError', 'hourClose')"
+              >*Atención: El horario de cierre tiene que ser mayor al horario de
+              apertura</span
+            >
+          </div>
+        </div>
+        <div class="mapa">
+          <label for="mapa" class="color3">
+            Ubica tu dirección en el mapa
+          </label>
+          <div style="margin-bottom: 10px; display: inline-flex">
+            <button
+              class="color3 background-color1 white button right"
+              type="button"
+              (click)="getGeoLocation()"
+            >
+              Marcar mi dirección actual
+            </button>
+            <i
+              class="fas fa-question-circle far"
+              style="margin-left: 3px;"
+              matTooltip="Esta opción permite tomar tu dirección actual exacta, directo de la ubicación GPS del dispositivo."
+            ></i>
+          </div>
+          <div class="form-group">
+            <label class="color3" style="font-size: 15px;"
+              >Ó busca una referencia en el mapa</label
+            >
+            <input
+              placeholder="Busca un lugar..."
+              autocorrect="off"
+              autocapitalize="off"
+              spellcheck="off"
+              type="text"
+              class="form-control"
+              #search
+              [formControl]="searchControl"
+            />
+          </div>
+          <agm-map
+            [latitude]="lat"
+            [longitude]="lng"
+            (mapClick)="setMarker($event); getAddress(markLat, markLng)"
+            [zoom]="mapZoom"
+            [scrollwheel]="null"
+            [gestureHandling]="'cooperative'"
+            [streetViewControl]="false"
+            [mapTypeControl]="true"
+          >
+            <agm-marker [latitude]="markLat" [longitude]="markLng"></agm-marker>
+          </agm-map>
+        </div>
+        <div class="col-1">
+          <label class="color3"
+            >Dirección exacta del comercio<i
+              class="fas fa-question-circle near"
+              matTooltip="Esta opción permite ajustar manualmente la dirección de tu comercio, en caso la opción mostrada en el mapa no sea la correcta o esté incompleta"
+            ></i
+          ></label>
+          <input
+            type="text"
+            formControlName="address"
+            placeholder="Ej: Cristobal de Acuña e11 8 y Av. 10 de agosto"
+          />
+        </div>
+        <div class="col-1">
+          <label class="color3">Referencia del comercio</label>
+          <input
+            type="text"
+            formControlName="reference"
+            placeholder="Ej: diagonal al redondel."
+          />
+        </div>
+        <div class="col-1">
+          <label class="color3">Breve descripción de tu comercio</label>
+          <textarea
+            formControlName="commerceDescription"
+            placeholder="Ej: Somos una tienda de barrio, donde podrás encontrar todo tipo de alimentos y bebidas. (Máximo 90 caracteres)"
+          ></textarea>
+        </div>
+        <div class="col-1">
+          <label class="color3 background-color1 white" for="foto"
+            ><i class="fas fa-camera white"></i> Subir Fotografía</label
+          >
+          <input
+            type="file"
+            name=""
+            id="foto"
+            (change)="onFileChangedRecibo($event)"
+          />
+          <img *ngIf="reciboURL" [src]="reciboURL | safe: 'resourceUrl'" />
+        </div>
+        <button
+          [disabled]="updateCommerceForm.invalid && !imagenSeleccionada"
+          class="background-color1 white center button center-button"
+          (click)="
+            this.imagenSeleccionada
+              ? operar(this.updateCommerceForm.get('commerceName').value)
+              : submitCommerce()
+          "
+          [ngStyle]="{
+            opacity: updateCommerceForm.valid && imagenSeleccionada ? '1' : '0.5',
+            cursor: updateCommerceForm.valid  && imagenSeleccionada ? 'pointer' : 'not-allowed'
+          }"
+        > ACTUALIZAR DATOS
+      </button>
+        <span class="help-block" *ngIf="updateCommerceForm.invalid"
+          >*Debe llenar todos los campos para continuar con el proceso de actualización</span
+        >
+        <br *ngIf="invalidControls.length > 0 ||imagenSeleccionada" />
+        <div *ngIf="invalidControls.length > 0 || !imagenSeleccionada">
+          <span class="help-block">Revise los siguientes campos: </span>
+          <span class="help-block" *ngFor="let name of invalidControls"
+            >{{ name }},
+          </span>
+          <span class="help-block" *ngIf="!imagenSeleccionada">Foto de tu local o producto</span>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
