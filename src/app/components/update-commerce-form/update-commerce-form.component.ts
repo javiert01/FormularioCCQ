@@ -36,7 +36,7 @@ export class UpdateCommerceFormComponent implements OnInit {
     'Todos los días'
   ];
 
-  @ViewChild('search')
+  @ViewChild('search', { static: true })
   public searchElementRef: ElementRef;
   public searchControl: FormControl;
   
