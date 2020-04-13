@@ -1,0 +1,15 @@
+#section-1-gracias{
+	padding: 30px;
+}
+#section-1-gracias h4{
+	margin-bottom: 20px;
+}
+#section-1-gracias #copiado{
+	display: none;
+}
+#section-1-gracias .show-copiado{
+	display: block!important;
+	animation-name: show-copiado;
+	animation-duration: 1s;
+	animation-timing-function: ease-in-out;
+}

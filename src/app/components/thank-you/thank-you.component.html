@@ -1,0 +1,67 @@
+<section id="section-1-gracias">
+			<div class="container">
+				<h4 class="grey center">
+					<span class="red">¡GENIAL</span>, YA SE ENCUENTRAN ACTUALIZADOS TUS DATOS! Compartir esta iniciativa ayuda a que más de 800.000 comercios en todo el Ecuador puedan ser parte. 
+				</h4>
+				<p class="grey center">
+					1.300 nuevos comercios se registran día a día, gracias a personas como tu que lo han compartido. ¡Únete tú también y ayuda a que esta iniciativa crezca!.
+				</p>
+				<div class="hr-center green-back"></div>
+				<a href="https://www.facebook.com/sharer/sharer.php?u=https%3A//todosmascerca.com" class="button center-button center white blue-back" target="_blank">
+					<p class="center white">
+						<img src="assets/06-1fb-share.svg" alt="" class="img-center buton-icon">Compartir en Facebook
+					</p>
+				</a>
+				<button id="copiarTexto" href="" class="button-bordered center-button center">
+					<p class="center grey">
+						<img src="assets/06-2link-share.svg" alt="" class="img-center buton-icon">Copiar Enlace
+					</p>
+					<p id="textoACopiar" class="display-none">
+						https://todosmascerca.com
+					</p>
+				</button>
+				<p id="copiado" class="center grey">
+					Texto copiado
+				</p>
+				<a href="http://www.facebook.com/dialog/send?app_id=3095239090508181&link=https://todosmascerca.com&redirect_uri=https://todosmascerca.com" class="button-bordered center-button center only-desktop" target="_blank">
+					<p class="center grey">
+						<img src="assets/06-3ms-share.svg" alt="" class="img-center buton-icon">Facebook Messenger
+					</p>
+				</a>
+				<a href="fb-messenger://share/?app_id=3095239090508181&link=https://todosmascerca.com" class="button-bordered center-button center only-mobile" target="_blank">
+					<p class="center grey">
+						<img src="assets/06-3ms-share.svg" alt="" class="img-center buton-icon">Facebook Messenger
+					</p>
+				</a>
+				<a href="https://twitter.com/intent/tweet?text=Nos%20hemos%20unido%20a%20la%20fant%C3%A1stica%20plataforma%20de%20https%3A//todosmascerca.com%20,%20los%20invito%20a%20hacerlo" class="button-bordered center-button center" target="_blank">
+					<p class="center grey">
+						<img src="assets/06-4tw-share.svg" alt="" class="img-center buton-icon">Compártela en twitter
+					</p>
+				</a>
+				<a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A//todosmascerca.com&title=Todos%20m%C3%A1s%20cerca.com&summary=Me%20acabo%20de%20registrar%20en%20todos%20m%C3%A1s%20cerca%20una%20genial%20idea%20para%20apoyar%20a%20los%20negocios.&source=" class="button-bordered center-button center" target="_blank">
+					<p class="center grey">
+						<img src="assets/06-5ld-share.svg" alt="" class="img-center buton-icon">Compartir en Linkedin
+					</p>
+				</a>
+				<a href="mailto:?subject=Todos%20más%20cerca&body=Me%20he%20registrado%20en%20https://todosmascerca.com%20creo%20que%20puede%20ayudarte%20también%20a%20ti." class="button-bordered center-button center grey" target="_blank">
+					<p class="center grey">
+						<img src="assets/06-6mail-share.svg" alt="" class="img-center buton-icon">Enviar un email
+					</p>
+				</a>
+			</div>
+		</section>
+        <script>
+		var copiarTexto = document.getElementById('copiarTexto');
+		var textoACopiar = document.getElementById('textoACopiar');
+
+		copiarTexto.onclick = function () {
+			var aux = document.createElement("input");
+			aux.setAttribute("value", textoACopiar.innerHTML);
+			document.body.appendChild(aux);
+			  aux.select();
+			document.execCommand("copy");
+			document.body.removeChild(aux);
+			var copiado = document.getElementById('copiado');
+			copiado.classList.add('show-copiado');
+		}	
+	</script>

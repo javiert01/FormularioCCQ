@@ -1,0 +1,21 @@
+.footer-top .col-2-equals img{
+	max-width: 374px;
+}
+
+.footer-bottom .col-2-equals{
+	align-items: center;
+}
+.footer-bottom .redes-container-out{
+	max-width: 300px;
+	display: block;
+	margin: auto;
+}
+
+.footer-bottom .redes-container-out .redes-container-in{
+	display: flex;
+	justify-content: space-between;
+	padding-bottom: 30px;
+}
+.footer-bottom .redes-container-out .redes-container-in a img{
+	max-width: 54px;
+}

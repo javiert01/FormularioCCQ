@@ -3,6 +3,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { MapsAPILoader } from '@agm/core';
 import { CategoryService } from 'src/app/services/category.service';
+import { Router } from '@angular/router'; 
+
 declare let google: any;
 
 @Component({
@@ -13,11 +15,11 @@ declare let google: any;
 export class UpdateCommerceFormComponent implements OnInit {
 
   updateCommerceForm: FormGroup;
-  lat;
-  lng;
+  lat = -0.1840506;
+  lng = -78.503374;
   markLat;
   markLng;
-  mapZoom;
+  mapZoom = 18;
   message;
   selectedFile;
   imgURL;
@@ -39,10 +41,11 @@ export class UpdateCommerceFormComponent implements OnInit {
   @ViewChild('search', { static: true })
   public searchElementRef: ElementRef;
   public searchControl: FormControl;
-  
+
   constructor(private http: HttpClient, private cdRef: ChangeDetectorRef,
     private mapsAPILoader: MapsAPILoader, private ngZone: NgZone,
-    private categoryService: CategoryService) { }
+    private categoryService: CategoryService,
+    private router: Router) { }
 
   ngOnInit() {
     this.loadCategoryData();
@@ -323,6 +326,7 @@ export class UpdateCommerceFormComponent implements OnInit {
     };
 
     console.log(this.commerce);
+    this.router.navigate(['/gracias']);
   }
 
   onFileChangedRecibo(event) {
@@ -350,47 +354,5 @@ export class UpdateCommerceFormComponent implements OnInit {
       this.reciboURL = reader.result.toString();
     };
   }
-  // INICIO GET-SIGNED-REQUEST METODO QUE SE LLAMA DESDE EL BOTON OPERAR
-  getSignedRequest2(commerceName) {
-    // console.log("El archivo selecionado: ", this.selectedFile);
-    const file = {
-      fName_p: 'commerce/' + commerceName + '/' + this.selectedFile.name,
-      fType_p: this.selectedFile.type
-    };
-
-    // LLAMAMOS A HEROKU PARA QUE FIRME LA PETICION
-    return this.http.get<any>(
-      'https://todo-mas-cerca-1.herokuapp.com/image/upload?fName_p=' +
-        file.fName_p +
-        '&fType_p=' +
-        file.fType_p
-    );
-  }
-  // FIN GET-SIGNED-REQUEST PARA EL BOTON OPERAR
-  // INICIO UPLOAD2 PARA LLAMAR DESDE EL METODO OPERAR
-  onUpload2(file, signedRequest, url) {
-    this.http.put(signedRequest, file).subscribe(data => {
-      // this.empresa.logo = url;
-      this.imgURL = url;
-      this.submitCommerce();
-    });
-  }
-  // FIN UPLOAD2 PARA LLAMAR DESDE EL METODO OPERAR
-  operar(name: String) {
-    name = name.replace(/\s/g, '');
-    if (this.imagenSubida) {
-      // console.log("Operar -> Se crea la imagen - creando");
-      // SI CARGA IMAGEN
-      // INICIO-SI-SUBE-IMAGEN
-      // console.log("Empresa Nueva: ", this.empresa);
-      this.getSignedRequest2(name).subscribe(data => {
-        // INICIO SE LLAMA AL METODO UPLOAD
-        this.onUpload2(this.selectedFile, data.signedRequest, data.url);
-        // FIN SE LLAMA AL METODO UPLOAD
-        // console.log(data.url);
-      });
-      // FIN-SI-SUBE-IMAGEN
-    }
-  }
-
+ 
 }

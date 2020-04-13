@@ -1,1 +1,218 @@
 /* You can add global styles to this file, and also import other style files */
+*{
+	margin: 0;
+	padding: 0;
+	font-family: 'Roboto',sans-serif;
+}
+.only-mobile{
+	display: none!important;
+}
+.only-desktop{
+	display: block;
+}
+.display-none{
+	display: none!important;
+}
+
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+						GLOBALES
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+/*Tipogrfias*/
+.roboto{
+	font-family: 'Roboto',sans-serif;
+}
+
+/*Anchos te fuente*/
+.regular{
+	font-weight: 400;
+}
+.bold{
+	font-weight: 700;
+}
+.black{
+	font-weight: 900;
+}
+/*Tamaños de fuente*/
+h1{
+	font-size: 55px;
+	line-height: 60px;
+}
+
+h2{
+	font-size: 50px;
+	line-height: 55px;
+}
+
+h3{
+	font-size: 35px;
+	line-height: 40px;
+}
+h4{
+	font-size: 28px;
+	line-height: 33px;
+}
+h5{
+	font-size: 25px;
+	line-height: 30px;
+}
+h6{
+	font-size: 20px;
+	line-height: 25px;
+}
+p{
+	font-size: 15px;
+	line-height: 20px;
+}
+label {
+  font-weight: bold;
+  color: #656C73;
+  ;
+}
+/*Alineaciones*/
+.center{
+	text-align: center;
+}
+.right{
+	text-align: right;
+}
+.justify{
+	text-align: justify;
+}
+/*colores*/
+.grey{
+	color: #363135;
+}
+.red{
+	color: #ff1c36;
+}
+.blue{
+	color: #264082;
+}
+.white{
+	color: #ffffff;
+}
+/*Backgrounds*/
+/*colores*/
+.grey-back{
+	background-color: #363135;
+}
+.red-back{
+	background-color: #ff1c36;
+}
+.blue-back{
+	background-color: #264082;
+}
+.white-back{
+	background-color: #ffffff;
+}
+.green-back{
+	background-color: #00af3f;
+}
+
+/*Contenedores*/
+.container{
+	max-width: 1170px;
+	width:100%;
+	display: block;
+	margin:auto;
+}
+.col-2-equals{
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-gap: 30px;
+}
+.col-2-equals .col{
+	margin-top: 30px;
+}
+.col-3-equals{
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-gap: 30px;
+}
+.col-3-equals .col{
+	margin-top: 30px;
+}
+.col-4-equals{
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	grid-gap: 30px;
+}
+.col-4-equals .col{
+	margin-top: 30px;
+}
+/*imagenes*/
+.img-center{
+	display: block;
+	margin: auto;
+}
+img{
+	width: 100%;
+}
+/*HR*/
+.hr{
+	height: 4px;
+	width:60px;
+	border-radius: 2px;
+	margin-bottom: 30px;
+}
+.hr-center{
+	height: 4px;
+	width:60px;
+	border-radius: 2px;
+	margin-bottom: 30px;
+	display: block;
+	margin:30px auto;
+}
+/*botones*/
+button{
+	max-width: 280px!important;
+	cursor: pointer;
+}
+.button{
+	width: 100%;
+	max-width: 260px;
+	margin: 10px 0;
+	border-radius: 10px;
+	text-decoration: none;
+	padding: 10px;
+	display: block;
+}
+.button-bordered{
+	width: 100%;
+	max-width: 260px;
+	margin: 10px 0;
+	border-radius: 10px;
+	text-decoration: none;
+	padding: 10px;
+	display: block;
+	border: 1px solid #363135;
+}
+.buton-icon{
+	max-width: 40px;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.center-button{
+	margin: 10px auto;
+}
+
+/*+++++++++++ANIMATION++++++++++++*/
+@keyframes show-copiado{
+	0%{
+		opacity: 0;
+	}
+	20%{
+		opacity: 100%;
+	}
+	80%{
+		opacity: 100%;
+	}
+	100%{
+		opacity: 0;
+	}
+}
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
