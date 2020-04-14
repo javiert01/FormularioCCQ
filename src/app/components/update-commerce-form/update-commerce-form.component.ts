@@ -3,7 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { MapsAPILoader } from '@agm/core';
 import { CategoryService } from 'src/app/services/category.service';
-import { Router } from '@angular/router'; 
+import { Router } from '@angular/router';
 
 declare let google: any;
 
@@ -28,6 +28,7 @@ export class UpdateCommerceFormComponent implements OnInit {
   imagenSeleccionada;
   commerce;
   direccion;
+  updateClicked = false;
 
   commerceCategories = [];
   invalidControls = [];
@@ -101,6 +102,17 @@ export class UpdateCommerceFormComponent implements OnInit {
           this.getAddress(this.lat, this.lng);
         });
       });
+    });
+
+    this.updateCommerceForm
+    .get('RUC')
+    .valueChanges.subscribe(data => {
+      if (data.length > 13) {
+        this.cdRef.detectChanges();
+        this.updateCommerceForm
+          .get('RUC')
+          .setValue(data.substring(0, 13));
+      }
     });
   }
 
@@ -354,5 +366,15 @@ export class UpdateCommerceFormComponent implements OnInit {
       this.reciboURL = reader.result.toString();
     };
   }
- 
+
+  onUpdateClicked() {
+    this.updateClicked = true;
+    this.updateCommerceForm.disable();
+  }
+
+  onCancelUpdate() {
+    this.updateClicked = false;
+    this.updateCommerceForm.enable();
+  }
+
 }

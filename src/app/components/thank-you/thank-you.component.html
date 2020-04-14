@@ -1,7 +1,7 @@
 <section id="section-1-gracias">
 			<div class="container">
 				<h4 class="grey center">
-					<span class="red">¡GENIAL</span>, YA SE ENCUENTRAN ACTUALIZADOS TUS DATOS! Compartir esta iniciativa ayuda a que más de 800.000 comercios en todo el Ecuador puedan ser parte. 
+					<span class="red">¡GENIAL</span>, YA SE ENCUENTRAN ACTUALIZADOS TUS DATOS! Compartir esta iniciativa ayuda a que más de 800.000 comercios en todo el Ecuador puedan ser parte.
 				</h4>
 				<p class="grey center">
 					1.300 nuevos comercios se registran día a día, gracias a personas como tu que lo han compartido. ¡Únete tú también y ayuda a que esta iniciativa crezca!.
@@ -12,7 +12,7 @@
 						<img src="assets/06-1fb-share.svg" alt="" class="img-center buton-icon">Compartir en Facebook
 					</p>
 				</a>
-				<button id="copiarTexto" href="" class="button-bordered center-button center">
+				<button id="copiarTexto" href="" class="button-bordered center-button center" (click)="copyMessage('https://todosmascerca.com')">
 					<p class="center grey">
 						<img src="assets/06-2link-share.svg" alt="" class="img-center buton-icon">Copiar Enlace
 					</p>
@@ -20,7 +20,7 @@
 						https://todosmascerca.com
 					</p>
 				</button>
-				<p id="copiado" class="center grey">
+				<p id="copiado" class="center grey" *ngIf="textoCopiado">
 					Texto copiado
 				</p>
 				<a href="http://www.facebook.com/dialog/send?app_id=3095239090508181&link=https://todosmascerca.com&redirect_uri=https://todosmascerca.com" class="button-bordered center-button center only-desktop" target="_blank">
@@ -50,18 +50,3 @@
 				</a>
 			</div>
 		</section>
-        <script>
-		var copiarTexto = document.getElementById('copiarTexto');
-		var textoACopiar = document.getElementById('textoACopiar');
-
-		copiarTexto.onclick = function () {
-			var aux = document.createElement("input");
-			aux.setAttribute("value", textoACopiar.innerHTML);
-			document.body.appendChild(aux);
-			  aux.select();
-			document.execCommand("copy");
-			document.body.removeChild(aux);
-			var copiado = document.getElementById('copiado');
-			copiado.classList.add('show-copiado');
-		}	
-	</script>
