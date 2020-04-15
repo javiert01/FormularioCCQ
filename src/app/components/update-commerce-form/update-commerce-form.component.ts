@@ -15,6 +15,7 @@ declare let google: any;
 export class UpdateCommerceFormComponent implements OnInit {
 
   updateCommerceForm: FormGroup;
+  formData = new FormData();
   lat = -0.1840506;
   lng = -78.503374;
   markLat;
@@ -29,6 +30,7 @@ export class UpdateCommerceFormComponent implements OnInit {
   commerce;
   direccion;
   updateClicked = false;
+  url = 'http://50.28.58.84:8080/apiTodoMasCerca/api/commerce-upload';
 
   commerceCategories = [];
   invalidControls = [];
@@ -270,9 +272,6 @@ export class UpdateCommerceFormComponent implements OnInit {
           if (result != null) {
             this.direccion = result.formatted_address;
             this.updateCommerceForm.get('address').setValue(this.direccion);
-            // console.log(result.formatted_address);
-            /* this.direccion = rsltAdrComponent[0].short_name;
-            console.log(this.direccion); */
           } else {
             alert(
               'No hay dirección disponible en este momento, llenela manualmente'
@@ -320,25 +319,24 @@ export class UpdateCommerceFormComponent implements OnInit {
 
   submitCommerce() {
     this.commerce = {
-      category: this.updateCommerceForm.get('category').value,
-      commercePhoto: this.imgURL,
-      frequency: this.updateCommerceForm.get('frecuency').value,
-      hourOpen: this.updateCommerceForm.get('hourOpen').value,
-      hourClose: this.updateCommerceForm.get('hourClose').value,
-      address: this.updateCommerceForm.get('address').value,
-      location: {
-        type: 'Point',
-        coordinates: [
-          this.updateCommerceForm.get('lng').value,
-          this.updateCommerceForm.get('ltd').value
-        ]
-      },
-      reference: this.updateCommerceForm.get('reference').value,
-      commerceDescription: this.updateCommerceForm.get('commerceDescription').value,
+      'id': this.updateCommerceForm.get('RUC').value,
+      'hourOpen': this.updateCommerceForm.get('hourOpen').value,
+      'hourClose': this.updateCommerceForm.get('hourClose').value,
+      'frequency': this.updateCommerceForm.get('frecuency').value,
+      'category': this.updateCommerceForm.get('category').value,
+      'address': this.updateCommerceForm.get('address').value,
+      'location': `{type: 'Point',coordinates: [${this.updateCommerceForm.get('lng').value},${this.updateCommerceForm.get('ltd').value}]}`,
+      'reference': this.updateCommerceForm.get('reference').value,
+      'commerceDescription': this.updateCommerceForm.get('commerceDescription').value,
+      'acceptTermsConditions': true
     };
-
-    console.log(this.commerce);
-    this.router.navigate(['/gracias']);
+    this.formData.append('data', JSON.stringify(this.commerce));
+    this.http.post(this.url + '/', this.formData).subscribe(
+      (data) => {
+        this.router.navigate(['/gracias']);
+      },
+      (err) => console.error(err)
+    );
   }
 
   onFileChangedRecibo(event) {
@@ -361,8 +359,8 @@ export class UpdateCommerceFormComponent implements OnInit {
 
     const reader = new FileReader();
     reader.readAsDataURL(event.target.files[0]);
+    this.formData.append('file', event.target.files[0], event.target.files[0].name);
     reader.onload = _event => {
-      console.log('Entra al cambio de reviboUrl: ', this.reciboURL);
       this.reciboURL = reader.result.toString();
     };
   }
