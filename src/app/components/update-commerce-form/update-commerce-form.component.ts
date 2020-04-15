@@ -53,7 +53,7 @@ export class UpdateCommerceFormComponent implements OnInit {
   ngOnInit() {
     this.loadCategoryData();
     this.updateCommerceForm = new FormGroup({
-      RUC: new FormControl(null, Validators.required),
+      RUC: new FormControl(null, [Validators.required, Validators.pattern(new RegExp('^[0-9]*$'))]),
       category: new FormControl('', Validators.required),
       frecuency: new FormControl('', Validators.required),
       hourOpen: new FormControl(null, [

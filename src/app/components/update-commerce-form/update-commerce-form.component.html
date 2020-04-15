@@ -8,11 +8,11 @@
       <form [formGroup]="updateCommerceForm">
         <div class="col-2-equals">
           <div class="col">
-            <label>RUC</label>
+            <label>Cédula o RUC</label>
             <input
               type="text"
               formControlName="RUC"
-              placeholder="Ingresa tu RUC"
+              placeholder="Ingresa tu cédula o RUC"
             />
             <span
               class="help-block"
@@ -22,6 +22,8 @@
               "
               >*Campo Obligatorio</span
             >
+            <span *ngIf="updateCommerceForm.hasError('pattern', 'RUC')" class="help-block">Su cédula/RUC debe contener solo
+              números</span>
           </div>
           <div class="col">
             <label>Categoría del comercio</label>
