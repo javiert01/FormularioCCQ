@@ -116,6 +116,11 @@ export class UpdateCommerceFormComponent implements OnInit {
           .setValue(data.substring(0, 13));
       }
     });
+
+    this.updateCommerceForm.valueChanges.subscribe(data => {
+      this.findInvalidControls();
+      this.translateControls(this.invalidControls);
+    });
   }
 
   loadCategoryData() {
@@ -170,6 +175,16 @@ export class UpdateCommerceFormComponent implements OnInit {
     }
 
     return `${hours}:${minutes}`;
+  }
+
+  findInvalidControls() {
+    const controls = this.updateCommerceForm.controls;
+    this.invalidControls = [];
+    for (const name in controls) {
+      if (controls[name].invalid) {
+        this.invalidControls.push(name);
+      }
+    }
   }
 
   translateControls(controls) {

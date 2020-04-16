@@ -40,9 +40,9 @@ h2 {
 }
  label[for="foto"]{
   width: 100%;
-  max-width: 310px;
-	padding: 5px 10px;
-	text-indent: 10px;
+  max-width: 255px;
+  padding: 15px 10px;
+	text-indent: 5px;
 	cursor: pointer;
 }
  .col-1{
@@ -95,6 +95,7 @@ select {
 
 .photo-btn {
   font-size: 15px;
+  width: 100px;
   font-weight: normal;
   text-align: center;
   border-radius: 25px;
