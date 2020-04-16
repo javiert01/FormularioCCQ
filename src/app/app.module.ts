@@ -31,7 +31,7 @@ import { ThankYouComponent } from './components/thank-you/thank-you.component';
     HttpClientModule,
     PipesModule,
     AgmCoreModule.forRoot({
-      apiKey: "AIzaSyAswlswB4nSDMpRuWl9MLTJVBLc4x9J7XE",
+      apiKey: "",
       libraries: ["places"]
     }),
     NgxMaterialTimepickerModule,
